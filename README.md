@@ -1,4 +1,4 @@
-# hotmart_2
+# Hotmart
 
 ## Project setup
 ```

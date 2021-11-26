@@ -1,33 +1,64 @@
 <template>
-  <v-container>
-    <v-row class="text-center px-0">
-      <v-col
-        v-for="produto in produtos"
-        :key="produto.id"
-        cols="12"
-        md="2"
-      >
-        <v-card elevation="3">
-          <v-img max-height="270" :src="produto.urlCoverPhoto"></v-img>
-          <v-list>
-            <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="text-left" v-text="produto.name"></v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-                <h4 class="green--text">R$ {{produto.price.value | currency}}</h4>
-                <v-spacer></v-spacer>
-                <h4 class="red--text">
-                  {{produto.temperature}}°
-                  <v-icon class="red--text">mdi-fire</v-icon>
-                </h4>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-col>
+  <v-col cols="12">
+    <v-row class="text-center px-0 mt-2">
+      <template v-if="produtos.length > 0">
+        <v-col
+          v-for="produto in produtos"
+          :key="produto.id"
+          cols="12"
+          md="2"
+        >
+          <v-card elevation="3" link :href="produto.salesPageLink" target="_blank">
+            <v-img height="270" :src="produto.urlCoverPhoto">
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular
+                    indeterminate
+                    color="grey darken-5"
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+            <v-list>
+              <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title class="text-left" v-text="produto.name"></v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                  <h4 class="green--text">R$ {{produto.price.value | currency}}</h4>
+                  <v-spacer></v-spacer>
+                  <h4 class="red--text">
+                    {{produto.temperature}}°
+                    <v-icon class="red--text">mdi-fire</v-icon>
+                  </h4>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-col>
+      </template>
+      <template v-else>
+        <v-col
+          v-for="p in 18"
+          :key="p"
+          cols="12"
+          md="2"
+        >
+          <v-card elevation="3">
+            <v-skeleton-loader
+              class="mx-auto"
+              height="270"
+              type="card"
+            ></v-skeleton-loader>
+          </v-card>
+        </v-col>
+      </template>
     </v-row>
-  </v-container>
+  </v-col>
 </template>
 
 <script>
