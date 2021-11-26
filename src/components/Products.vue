@@ -33,7 +33,7 @@
                   <h4 class="green--text">R$ {{produto.price.value | currency}}</h4>
                   <v-spacer></v-spacer>
                   <h4 class="red--text">
-                    {{produto.temperature}}°
+                    {{parseInt(produto.temperature)}}°
                     <v-icon class="red--text">mdi-fire</v-icon>
                   </h4>
               </v-list-item>
