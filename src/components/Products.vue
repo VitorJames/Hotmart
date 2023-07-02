@@ -33,7 +33,7 @@
                   <h4 class="green--text">R$ {{produto.price.value | currency}}</h4>
                   <v-spacer></v-spacer>
                   <h4 class="red--text">
-                    {{parseInt(produto.temperature)}}°
+                    {{produto.temperature | toInto()}}°
                     <v-icon class="red--text">mdi-fire</v-icon>
                   </h4>
               </v-list-item>
@@ -74,11 +74,14 @@ export default {
     this.login();
   },
   filters:{
-    currency(numero){
-      numero = parseFloat(numero).toFixed(2).split('.');
-      numero[0] = numero[0].split(/(?=(?:...)*$)/).join('.');
-      return numero.join(',');
+    currency(number){
+      number = parseFloat(number).toFixed(2).split('.');
+      number[0] = number[0].split(/(?=(?:...)*$)/).join('.');
+      return number.join(',');
     },
+    toInt(number){
+      return parseInt(number)
+    }
   },
   methods:{
     getProducts(){
